@@ -3,12 +3,6 @@ name: Rust Test
 on:
   workflow_call:
     inputs:
-      os:
-        required: true
-        type: string
-      toolchain:
-        required: true
-        type: string
       working-directory:
         default: "."
         required: false
@@ -19,7 +13,12 @@ env:
 
 jobs:
   test:
-    runs-on: ${{ inputs.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        toolchain: [stable, nightly]
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
@@ -27,14 +26,14 @@ jobs:
       - name: Setup toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: ${{ inputs.toolchain }}
+          toolchain: ${{ matrix.toolchain }}
 
       - name: Install dependencies
-        if: ${{ inputs.os == 'ubuntu-latest' }}
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         run: sudo apt update && sudo apt install libomp-dev
 
       - name: Install dependencies
-        if: ${{ inputs.os == 'macos-latest' }}
+        if: ${{ matrix.os == 'macos-latest' }}
         run: brew install llvm libomp cmake
 
       - name: Run cargo check
