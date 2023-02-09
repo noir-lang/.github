@@ -36,11 +36,6 @@ jobs:
         if: ${{ matrix.os == 'macos-latest' }}
         run: brew install llvm libomp cmake
 
-      - name: Run cargo check
-        working-directory: ${{ inputs.working-directory }}
-        run: |
-          cargo check --all-targets --verbose
-
       - name: Run cargo test
         working-directory: ${{ inputs.working-directory }}
         run: |
@@ -64,11 +59,6 @@ jobs:
           sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 100
           sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
           sudo update-alternatives --install /usr/bin/lld lld /usr/bin/lld-10 100
-
-      - name: Run cargo check
-        working-directory: ${{ inputs.working-directory }}
-        run: |
-          cargo check --all-targets --verbose
 
       - name: Run cargo test
         working-directory: ${{ inputs.working-directory }}
