@@ -1,0 +1,25 @@
+name: Spellcheck
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        default: "."
+        required: false
+        type: string
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+
+      - name: Check spelling
+        uses: streetsidesoftware/cspell-action@v2
+        with:
+          root: ${{ inputs.working-directory }}
+          strict: false # Do not fail, if a spelling mistake is found (This can be annoying for contributors)
+          incremental_files_only: true # Run this action on files which have changed in PR
+          files: |
+            **/*.{md,rs}
