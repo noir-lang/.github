@@ -10,6 +10,7 @@ on:
 
 jobs:
   spellcheck:
+    name: Spellcheck
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources

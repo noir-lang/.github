@@ -13,12 +13,18 @@ env:
 
 jobs:
   test:
+    name: Test on ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        toolchain: [1.66.0]
+        include:
+          - name: ubuntu
+            os: ubuntu-latest
+            toolchain: 1.66.0
+          - name: mac
+            os: macos-latest
+            toolchain: 1.66.0
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
@@ -42,6 +48,7 @@ jobs:
           cargo test -- --test-threads=1
 
   test_clang10:
+    name: Test with clang 10
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout sources
