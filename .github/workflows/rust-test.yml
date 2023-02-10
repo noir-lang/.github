@@ -42,6 +42,13 @@ jobs:
         if: ${{ matrix.os == 'macos-latest' }}
         run: brew install llvm libomp cmake
 
+      - name: Setup noir cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/noir_cache/
+          key: noir_cache
+
       - name: Setup cargo cache
         uses: actions/cache@v3
         with:
@@ -77,6 +84,13 @@ jobs:
           sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 100
           sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
           sudo update-alternatives --install /usr/bin/lld lld /usr/bin/lld-10 100
+
+      - name: Setup noir cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/noir_cache/
+          key: noir_cache
 
       - name: Setup cargo cache
         uses: actions/cache@v3
