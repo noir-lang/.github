@@ -13,7 +13,7 @@ env:
 
 jobs:
   test:
-    name: test on ${{ matrix.name }}
+    name: Test on ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -48,7 +48,7 @@ jobs:
           cargo test -- --test-threads=1
 
   test_clang10:
-    name: test w/ clang 10
+    name: Test with clang 10
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout sources

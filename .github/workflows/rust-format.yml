@@ -13,7 +13,7 @@ env:
 
 jobs:
   format:
-    name: format
+    name: Format
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources

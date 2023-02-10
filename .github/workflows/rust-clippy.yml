@@ -13,7 +13,7 @@ env:
 
 jobs:
   clippy:
-    name: clippy
+    name: Clippy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
