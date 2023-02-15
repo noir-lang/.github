@@ -106,4 +106,4 @@ jobs:
       - name: Run cargo test
         working-directory: ${{ inputs.working-directory }}
         run: |
-          cargo test -- --test-threads=1
+          cargo test --frozen -- --test-threads=1
