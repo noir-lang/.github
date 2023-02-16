@@ -28,7 +28,14 @@ jobs:
       - name: Install dependencies
         run: sudo apt update && sudo apt install libomp-dev
 
+      - name: Check for lockfile
+        working-directory: ${{ inputs.working-directory }}
+        run: |
+          if [ -f Cargo.lock ]; then
+            echo "LOCKED_FLAG=--locked" >> $GITHUB_ENV
+          fi
+
       - name: Run cargo clippy
         working-directory: ${{ inputs.working-directory }}
         run: |
-          cargo clippy --locked -- -D warnings
+          cargo clippy ${{ env.LOCKED_FLAG }} -- -D warnings

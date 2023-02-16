@@ -60,10 +60,17 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
+      - name: Check for lockfile
+        working-directory: ${{ inputs.working-directory }}
+        run: |
+          if [ -f Cargo.lock ]; then
+            echo "LOCKED_FLAG=--locked" >> $GITHUB_ENV
+          fi
+
       - name: Run cargo test
         working-directory: ${{ inputs.working-directory }}
         run: |
-          cargo test --locked -- --test-threads=1
+          cargo test ${{ env.LOCKED_FLAG }} -- --test-threads=1
 
   test_clang10:
     name: Test with clang 10
@@ -103,7 +110,14 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
+      - name: Check for lockfile
+        working-directory: ${{ inputs.working-directory }}
+        run: |
+          if [ -f Cargo.lock ]; then
+            echo "LOCKED_FLAG=--locked" >> $GITHUB_ENV
+          fi
+
       - name: Run cargo test
         working-directory: ${{ inputs.working-directory }}
         run: |
-          cargo test --locked -- --test-threads=1
+          cargo test ${{ env.LOCKED_FLAG }} -- --test-threads=1
