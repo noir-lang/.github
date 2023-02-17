@@ -70,7 +70,7 @@ jobs:
       - name: Run cargo test
         working-directory: ${{ inputs.working-directory }}
         run: |
-          cargo test ${{ env.LOCKED_FLAG }} -- --test-threads=1
+          cargo test ${{ env.LOCKED_FLAG }} --workspace -- --test-threads=1
 
   test_clang10:
     name: Test with clang 10
@@ -120,4 +120,4 @@ jobs:
       - name: Run cargo test
         working-directory: ${{ inputs.working-directory }}
         run: |
-          cargo test ${{ env.LOCKED_FLAG }} -- --test-threads=1
+          cargo test ${{ env.LOCKED_FLAG }} --workspace -- --test-threads=1
