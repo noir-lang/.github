@@ -38,4 +38,4 @@ jobs:
       - name: Run cargo clippy
         working-directory: ${{ inputs.working-directory }}
         run: |
-          cargo clippy ${{ env.LOCKED_FLAG }} --all -- -D warnings
+          cargo clippy ${{ env.LOCKED_FLAG }} --workspace -- -D warnings
