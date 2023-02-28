@@ -13,19 +13,22 @@ env:
 
 jobs:
   test:
-    name: Test on ${{ matrix.name }}
+    name: ${{ matrix.title }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
       matrix:
         include:
           - name: ubuntu
+            title: Test on ubuntu
             os: ubuntu-latest
             toolchain: 1.66.0
           - name: mac
+            title: Test on mac
             os: macos-latest
             toolchain: 1.66.0
           - name: clang-10
+            title: Test with clang 10
             os: ubuntu-latest
             toolchain: 1.66.0
     steps:
