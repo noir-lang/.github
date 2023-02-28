@@ -40,23 +40,23 @@ jobs:
         with:
           toolchain: ${{ matrix.toolchain }}
 
-      - name: Setup clang-10
+      - name: Install dependencies
         if: matrix.name == 'clang-10'
         run: |
           sudo apt update
-          sudo apt install clang-10 lld-10
+          sudo apt install clang-10 lld-10 libomp-dev
           sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 100
           sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
           sudo update-alternatives --install /usr/bin/lld lld /usr/bin/lld-10 100
 
       - name: Install dependencies
-        if: ${{ matrix.os == 'ubuntu-latest' }}
+        if: matrix.name == 'ubuntu'
         run: |
           sudo apt update
           sudo apt install libomp-dev
 
       - name: Install dependencies
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: matrix.name == 'mac'
         run: brew install llvm libomp cmake
 
       - name: Setup noir cache
