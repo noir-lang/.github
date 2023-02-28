@@ -29,7 +29,7 @@ jobs:
             toolchain: 1.66.0
           - name: clang-10
             title: Test with clang 10
-            os: ubuntu-latest
+            os: ubuntu-20.04
             toolchain: 1.66.0
     steps:
       - name: Checkout sources
