@@ -13,17 +13,23 @@ env:
 
 jobs:
   test:
-    name: Test on ${{ matrix.name }}
+    name: ${{ matrix.title }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         include:
           - name: ubuntu
+            title: Test on ubuntu
             os: ubuntu-latest
             toolchain: 1.66.0
           - name: mac
+            title: Test on mac
             os: macos-latest
+            toolchain: 1.66.0
+          - name: clang-10
+            title: Test with clang 10
+            os: ubuntu-20.04
             toolchain: 1.66.0
     steps:
       - name: Checkout sources
@@ -35,62 +41,23 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
 
       - name: Install dependencies
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: sudo apt update && sudo apt install libomp-dev
-
-      - name: Install dependencies
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: brew install llvm libomp cmake
-
-      - name: Setup noir cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/noir_cache/
-          key: noir_cache
-
-      - name: Setup cargo cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Check for lockfile
-        working-directory: ${{ inputs.working-directory }}
-        run: |
-          if [ -f Cargo.lock ]; then
-            echo "LOCKED_FLAG=--locked" >> $GITHUB_ENV
-          fi
-
-      - name: Run cargo test
-        working-directory: ${{ inputs.working-directory }}
-        run: |
-          cargo test ${{ env.LOCKED_FLAG }} --workspace -- --test-threads=1
-
-  test_clang10:
-    name: Test with clang 10
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v3
-
-      - name: Setup toolchain
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: stable
-
-      - name: Install dependencies
+        if: matrix.name == 'clang-10'
         run: |
           sudo apt update
           sudo apt install clang-10 lld-10 libomp-dev
           sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 100
           sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
           sudo update-alternatives --install /usr/bin/lld lld /usr/bin/lld-10 100
+
+      - name: Install dependencies
+        if: matrix.name == 'ubuntu'
+        run: |
+          sudo apt update
+          sudo apt install libomp-dev
+
+      - name: Install dependencies
+        if: matrix.name == 'mac'
+        run: brew install llvm libomp cmake
 
       - name: Setup noir cache
         uses: actions/cache@v3
