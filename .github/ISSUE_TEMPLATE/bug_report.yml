@@ -1,0 +1,55 @@
+name: Bug Report
+description: File a bug report to help us improve.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Description
+        Thanks for taking the time to fill out this bug report to help us improve Noir!
+  - type: textarea
+    id: aim
+    attributes:
+      label: Aim
+      description: Describe what you tried to achieve.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: bug
+    attributes:
+      label: Bug
+      description: Describe the bug. Supply error codes / terminal logs if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: To reproduce
+      description: Describe the steps to reproduce the behavior.
+      value: |
+        1.
+        2.
+        3.
+        4.
+  - type: markdown
+    attributes:
+      value: |
+        ## Environment
+        Specify the versions and environment details that were having these issues.
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: Please provide version details and other environment configuration that exhibited the bug.
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Please provide any additional context that may be applicable.
