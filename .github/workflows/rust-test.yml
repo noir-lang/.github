@@ -66,17 +66,6 @@ jobs:
             ~/noir_cache/
           key: noir_cache
 
-      - name: Setup cargo cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
       - name: Check for lockfile
         working-directory: ${{ inputs.working-directory }}
         run: |
