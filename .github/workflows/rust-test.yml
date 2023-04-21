@@ -76,4 +76,4 @@ jobs:
       - name: Run cargo test
         working-directory: ${{ inputs.working-directory }}
         run: |
-          cargo test ${{ env.LOCKED_FLAG }} --workspace -- --test-threads=1
+          cargo test ${{ env.LOCKED_FLAG }} --workspace
