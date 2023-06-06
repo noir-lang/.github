@@ -7,6 +7,10 @@ on:
         default: "."
         required: false
         type: string
+      targets:
+        description: Comma-separated list of target triples to install for the Rust toolchain
+        required: false
+        type: string
 
 env:
   CARGO_TERM_COLOR: always
@@ -23,6 +27,7 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
+          targets: ${{ inputs.targets }}
           components: clippy
 
       - name: Install dependencies
