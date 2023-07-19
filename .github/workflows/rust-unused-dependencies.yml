@@ -12,8 +12,8 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  udeps:
-    name: Udeps
+  unused-deps:
+    name: Unused deps
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
