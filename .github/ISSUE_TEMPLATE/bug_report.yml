@@ -2,112 +2,52 @@ name: Bug Report
 description: Report an unexpected behavior.
 type: bug
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for taking the time to create the Issue and welcome to the Noir community!
-        # Description
-  - type: textarea
-    id: aim
-    attributes:
-      label: Aim
-      description: Describe high-level what you tried to achieve.
-    validations:
-      required: true
   - type: textarea
     id: expected
     attributes:
       label: Expected Behavior
-      description: Describe what you expected to happen.
+      description: Describe what you aimed to do and expected to happen.
     validations:
       required: true
   - type: textarea
     id: bug
     attributes:
       label: Bug
-      description: Describe the bug. Supply error codes / terminal logs if applicable.
+      description: Describe the unexpected behavior, with error codes and terminal logs if applicable.
     validations:
       required: true
   - type: textarea
-    id: reproduction
-    attributes:
-      label: To Reproduce
-      description: Describe the steps to reproduce the behavior.
-      value: |
-        1.
-        2.
-        3.
-        4.
-  - type: dropdown
     id: workaround
     attributes:
       label: Workaround
-      description: Is there a workaround for this Issue? 
-      options:
-        - "Yes"
+      description: Describe a workaround, if there is one.
   - type: textarea
-    id: workaround_description
-    attributes:
-      label: Workaround Description
-      description: If yes, supplement how could the Issue be worked around.
-  - type: input
-    id: additional
-    attributes:
-      label: Additional Context
-      description: Supplement further information if applicable.
-  - type: markdown
-    attributes:
-      value: |
-        # Impact
-  - type: dropdown
     id: impact
     attributes:
       label: Project Impact
-      description: How does this affect a project you or others are working on? 
-      options:
-        - "Nice-to-have"
-        - "Blocker"
-  - type: input
-    id: blocker_context
-    attributes:
-      label: Blocker Context
-      description: If a blocker, supplement how does this Issue affect the project.
-  - type: markdown
-    attributes:
-      value: |
-        # Environment
+      description: Describe how does this affect what you or others are working on.
   - type: input
     id: nargo-version
     attributes:
       label: Nargo Version
-      description: Output of running `nargo --version`
-      placeholder: "nargo version = 0.32.0 noirc version = 0.32.0+c679f01a19b02ad2ac2287c8e699b46887f7872c (git version hash: c679f01a19b02ad2ac2287c8e699b46887f7872c, is dirty: false)"
+      description: Output from running `nargo --version`.
+      placeholder: "e.g. 1.0.0-beta.20"
   - type: input
     id: noirjs-version
     attributes:
       label: NoirJS Version
-      description: Version number of `noir_js` in `package.json`
-      placeholder: "0.32.0"
+      description: Version number of `noir_js` in `package.json`.
+      placeholder: "e.g. 1.0.0-beta.20"
   - type: input
     id: backend-version
     attributes:
-      label: Proving Backend Tooling & Version
-      description: Type of tooling and version of the Proving Backend used
-      placeholder: "Barretenberg - bb CLI - 0.46.1"
-  - type: markdown
-    attributes:
-      value: |
-        # Pull Request
+      label: Proving Backend
+      description: The proving backend tooling and version used.
+      placeholder: "e.g. Barretenberg bb 5.0.0-nightly.20260324"
   - type: dropdown
     id: pr_preference
     attributes:
       label: Would you like to submit a PR for this Issue?
-      description: Fellow contributors are happy to provide support where applicable.
       options:
         - "Maybe"
         - "Yes"
-  - type: input
-    id: pr_support
-    attributes:
-      label: Support Needs
-      description: Support from other contributors you are looking for to create a PR for this Issue.
