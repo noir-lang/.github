@@ -20,7 +20,7 @@ body:
     id: workaround
     attributes:
       label: Workaround
-      description: Describe a workaround, if there is one.
+      description: Describe workarounds, if any.
   - type: textarea
     id: impact
     attributes:
